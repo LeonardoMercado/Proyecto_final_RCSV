@@ -19,7 +19,7 @@
 
         <param 
             name="robot_description" 
-            command="$(find xacro)/xacro '$(find kobuki_description)/urdf/kobuki_standalone.urdf.xacro'"/>
+            command="$(find xacro)/xacro '$(find proyecto_final_rcsv)/urdf/kobuki_standalone.urdf.xacro'"/>
 
         <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot_name)"
             args="-x $(arg x) -y $(arg y) -z $(arg z)
@@ -43,7 +43,7 @@
 
         <param 
             name="robot_description" 
-            command="$(find xacro)/xacro '$(find kobuki_description)/urdf/kobuki_standalone.urdf.xacro'"/>
+            command="$(find xacro)/xacro '$(find proyecto_final_rcsv)/urdf/kobuki_standalone.urdf.xacro'"/>
 
         <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot_name)"
             args="-x $(arg x) -y $(arg y) -z $(arg z)
@@ -67,7 +67,7 @@
 
         <param 
             name="robot_description" 
-            command="$(find xacro)/xacro '$(find kobuki_description)/urdf/kobuki_standalone.urdf.xacro'"/>
+            command="$(find xacro)/xacro '$(find proyecto_final_rcsv)/urdf/kobuki_standalone.urdf.xacro'"/>
 
         <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot_name)"
             args="-x $(arg x) -y $(arg y) -z $(arg z)
