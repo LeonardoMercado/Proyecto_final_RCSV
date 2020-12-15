@@ -9,7 +9,7 @@
     <param name="trayec_py" value="$(arg trayec)"/>
 
     <param name="esfera_description" command="$(find xacro)/xacro --inorder '$(find proyecto_final_rcsv)/urdf/esfera.xacro'" />
-		<arg name="xsphe" default="1.0"/>
+		<arg name="xsphe" default="2.0"/>
 		<arg name="ysphe" default="0.0"/>
 		<arg name="zsphe" default="0.5"/>
 
