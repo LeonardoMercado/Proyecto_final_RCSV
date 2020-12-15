@@ -2,8 +2,12 @@
 
 import rospy
 import cv2
+import numpy as np
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
+
+azul_min = np.array([100,100,20],np.uint8)
+azul_max = np.array([130,255,255],np.uint8)
 
 
 class image_receive:
@@ -21,20 +25,19 @@ class image_receive:
         except CvBridgeError as e:
             print(e)
 
-        #--- Si se recibe un frame valido se dibuja un circulo y un text
-        (rows,cols,channels) = cv_image.shape
-        print("Tenemos {} filas y {} columnas y {} canales desde la camara".format(rows,cols,channels))
-        if cols > 20 and rows > 20:
-            #--- Circle
-            cv2.circle(cv_image, (640,360), 70, 255, 2)
-            
-            #--- Text
-            text = "Imagen recibida"
-            cv2.putText(cv_image, text, (350, 100), cv2.FONT_HERSHEY_SIMPLEX, 2, [0,0,200], 5)
+        img_hsv = cv2.cvtColor(cv_image,cv2.COLOR_BGR2HSV) # Se convierte al espacio HSV
 
-        #--- Mostramos el frame recibido
-        cv2.imshow("Imagen capturada", cv_image)
-        cv2.waitKey(3)
+        mascara_1 = cv2.inRange(img_hsv,azul_min,azul_max)
+
+        cv2.imshow('camara',cv_image)
+        cv2.imshow('En HSV',img_hsv)
+        cv2.imshow('Filtrado HSV',mascara_1)
+
+
+        if cv2.waitKey(1) & 0xFF == ord('r'):
+            print('----Reiniciando------')
+            cv2.destroyAllWindows()
+        
 
 #----Funcion Main
 def main():

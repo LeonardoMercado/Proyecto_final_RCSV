@@ -123,6 +123,4 @@
         output="screen" />
         
 
-    <node name="rviz" pkg="rviz" type="rviz" args=" -d $(find proyecto_final_rcsv)/config/config.rviz"/> 
-
 </launch>
