@@ -1,0 +1,27 @@
+<robot name="esfera">
+      <link name="esfera_link">
+        <inertial>
+          <origin xyz="0 0 0" />
+          <mass value="0.001" />
+          <inertia  ixx="0.000001" ixy="0.0"  ixz="0.0"  iyy="0.000001"  iyz="0.0"  izz="0.000001" />
+        </inertial>
+        <visual>
+          <origin xyz="0.0 0.0 0.0"/>
+         <geometry>
+           <sphere radius="0.15"/>
+         </geometry>
+         <material name="blue">
+          <color rgba="0.0 1.0 0.0 0.95"/>
+        </material>
+       </visual>
+       <collision>
+         <origin xyz="0.0 0.0 0.0"/>
+         <geometry>
+           <sphere radius="0.15"/>
+         </geometry>
+       </collision>       
+     </link>
+     <gazebo reference="esfera_link">      
+        <material>Gazebo/Blue</material>
+     </gazebo>
+</robot>

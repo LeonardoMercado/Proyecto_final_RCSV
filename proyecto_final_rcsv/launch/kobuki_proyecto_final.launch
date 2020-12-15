@@ -1,10 +1,17 @@
 <!-- Launches Kobuki Gazebo simulation in the world for this assigment -->
 <launch>
-    <!-- start Gazebo with taller3 world -->
+
+    <!-- start Gazebo with taller empty world -->
     <!-- Define world -->
-    <arg name="proyecto_final_world" default="$(find proyecto_final_rcsv)/worlds/proyecto_final_world.world"/>
+    <arg name="proyecto_final_world" default="$(find gazebo_ros)/launch/empty_world.launch"/>
+    
     <arg name="trayec" default="1"/>
     <param name="trayec_py" value="$(arg trayec)"/>
+
+    <param name="esfera_description" command="$(find xacro)/xacro --inorder '$(find proyecto_final_rcsv)/urdf/esfera.xacro'" />
+		<arg name="xsphe" default="1.0"/>
+		<arg name="ysphe" default="0.0"/>
+		<arg name="zsphe" default="0.5"/>
 
     <group if="$(eval arg('trayec') == 1)">
         <!-- Robot initial pose -->
@@ -80,6 +87,8 @@
 
 
 
+
+
     <!-- Launch Gazebo-->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(arg proyecto_final_world)"/> 
@@ -89,6 +98,13 @@
     </include>  
       <!-- Spawn Robot-->
 
+
+    <node name="esfera_spawn" 
+			  pkg="gazebo_ros" 
+			  type="spawn_model" 
+			  output="screen"
+		       args="-urdf -param esfera_description 
+			  -model esfera -x $(arg xsphe) -y $(arg ysphe) -z $(arg zsphe)"/> 
     
 
     <!-- State Publisher -->
@@ -105,7 +121,7 @@
         type="trayectory_publisher.py" 
         name="trayectory_publisher" 
         output="screen" />
-
+        
 
     <node name="rviz" pkg="rviz" type="rviz" args=" -d $(find proyecto_final_rcsv)/config/config.rviz"/> 
 
