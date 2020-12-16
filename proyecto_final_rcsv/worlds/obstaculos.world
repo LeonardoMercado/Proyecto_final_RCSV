@@ -119,9 +119,9 @@
           </geometry>
           <material>
             <script>
-              <uri>model://number2/materials/scripts</uri>
-              <uri>model://number2/materials/textures</uri>
-              <name>Number/Two</name>
+              <uri>model://number1/materials/scripts</uri>
+              <uri>model://number1/materials/textures</uri>
+              <name>Number/One</name>
             </script>
           </material>
         </visual>

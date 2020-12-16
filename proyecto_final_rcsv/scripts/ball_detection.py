@@ -8,8 +8,8 @@ from sensor_msgs.msg        import Image
 from geometry_msgs.msg      import Point
 from cv_bridge              import CvBridge, CvBridgeError
 
-caja_1_clasificador = cv2.CascadeClassifier('/home/leonardo/Documentos/01_RCSV/05_Proyecto_Final/Proyecto_final_RCSV/proyecto_final_rcsv/scripts/caja_1_clasificador.xml')
-cono_clasificador = cv2.CascadeClassifier('/home/leonardo/Documentos/01_RCSV/05_Proyecto_Final/Proyecto_final_RCSV/proyecto_final_rcsv/scripts/cono_clasificador.xml')
+#caja_1_clasificador = cv2.CascadeClassifier('/home/leonardo/Documentos/01_RCSV/05_Proyecto_Final/Proyecto_final_RCSV/proyecto_final_rcsv/scripts/caja_1_clasificador.xml')
+#cono_clasificador = cv2.CascadeClassifier('/home/leonardo/Documentos/01_RCSV/05_Proyecto_Final/Proyecto_final_RCSV/proyecto_final_rcsv/scripts/cono_clasificador.xml')
 
 azul_min = np.array([110,100,20],np.uint8)
 azul_max = np.array([130,255,255],np.uint8)
@@ -64,7 +64,7 @@ class image_receive:
         cv2.line(cv_image, (639,342), (739,342), (0,0,255), 2)
         cv2.line(cv_image, (639,342), (639,442), (0,255,0), 2)
 
-        
+        """
         caja_1 = caja_1_clasificador.detectMultiScale(gray, scaleFactor = 10, minNeighbors = 150,minSize=(70,78))
         cono = cono_clasificador.detectMultiScale(gray, scaleFactor = 10, minNeighbors = 150,minSize=(70,78))
 
@@ -73,19 +73,35 @@ class image_receive:
             if (x<x_l_2 and y<y_l_2):
                 cv2.rectangle(cv_image,(x_l_1,y_l_1),(x_l_2,y_l_2),(0,0,255),2)
                 cv2.putText(cv_image,'Caja',(10,20),2,0.7,(0,0,255),2,cv2.LINE_AA)
+                self.puntos.x = x+100
+                self.puntos.y = y
+                self.puntos.z = 0
+                self.esfera_publicador_posicion.publish(self.puntos)
             elif (x>x_r_1 and y<y_r_2):
                 cv2.rectangle(cv_image,(x_r_1,y_r_1),(x_r_2,y_r_2),(0,0,255),2)
                 cv2.putText(cv_image,'Caja',(1140,20),2,0.7,(0,0,255),2,cv2.LINE_AA)
+                self.puntos.x = x-100
+                self.puntos.y = y
+                self.puntos.z = 0
+                self.esfera_publicador_posicion.publish(self.puntos)
 
         for (x,y,w,h) in cono:
             if (x<x_l_2 and y<y_l_2):
                 cv2.rectangle(cv_image,(x_l_1,y_l_1),(x_l_2,y_l_2),(26,127,239),2)
                 cv2.putText(cv_image,'Cono',(10,20),2,0.7,(26,127,239),2,cv2.LINE_AA)
+                self.puntos.x = x+100
+                self.puntos.y = y
+                self.puntos.z = 0
+                self.esfera_publicador_posicion.publish(self.puntos)
             elif (x>x_r_1 and y<y_r_2):            
                 cv2.rectangle(cv_image,(x_r_1,y_r_1),(x_r_2,y_r_2),(26,127,239),2)
                 cv2.putText(cv_image,'Cono',(1140,20),2,0.7,(26,127,239),2,cv2.LINE_AA)
+                self.puntos.x = x-100
+                self.puntos.y = y
+                self.puntos.z = 0
+                self.esfera_publicador_posicion.publish(self.puntos)
         
-        
+        """
         cv2.imshow('deteccion',cv_image)
         #cv2.imshow('En HSV',img_hsv)
         #cv2.imshow('Filtrado HSV',mascara_1)
