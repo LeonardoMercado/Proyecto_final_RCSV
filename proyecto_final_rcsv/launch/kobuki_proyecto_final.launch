@@ -3,10 +3,11 @@
 
     <!-- start Gazebo with taller empty world -->
     <!-- Define world -->
+    <arg name="detector" default="true"/>    
     <arg name="proyecto_final_world" default="$(find proyecto_final_rcsv)/worlds/obstaculos.world"/>
     
-    <arg name="trayec" default="1"/>
-    <param name="trayec_py" value="$(arg trayec)"/>
+    
+    
 
     <param name="esfera_description" command="$(find xacro)/xacro --inorder '$(find proyecto_final_rcsv)/urdf/esfera.xacro'" />
 		<arg name="xsphe" default="2.0"/>
@@ -55,7 +56,7 @@
 			  -model esfera -x $(arg xsphe) -y $(arg ysphe) -z $(arg zsphe)"/> 
     
 
-    <node pkg="proyecto_final_rcsv" name="deteccion" type="ball_detection.py" output="screen" >
+    <node if="$(arg detector)" pkg="proyecto_final_rcsv" name="deteccion" type="ball_detection.py" output="screen" >
     </node>
         
 
