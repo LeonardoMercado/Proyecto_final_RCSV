@@ -3,9 +3,10 @@
 import rospy
 import cv2
 import numpy as np
-from sensor_msgs.msg import Image
-from cv_bridge import CvBridge, CvBridgeError
-
+from std_msgs.msg           import String
+from sensor_msgs.msg        import Image
+from geometry_msgs.msg      import Point
+from cv_bridge              import CvBridge, CvBridgeError
 azul_min = np.array([110,100,20],np.uint8)
 azul_max = np.array([130,255,255],np.uint8)
 
@@ -16,6 +17,9 @@ class image_receive:
         #--- Suscriptor del topico de la camara
         self.bridge = CvBridge()
         self.image_sub = rospy.Subscriber("/kobuki/camara_principal/image_raw",Image,self.callback)
+        #--- Publicador para transmitir las coodenadas x,y de la esfera con respecto a la camara
+        self.puntos = Point()
+        self.esfera_publicador_posicion  = rospy.Publisher("/esfera_posicion/puntos",Point,queue_size=1)
 
     def callback(self,data):  #--- Callback del suscriptor
     
@@ -41,12 +45,14 @@ class image_receive:
                 fuente = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(cv_image, 'centro en [{};{}]'.format(x,y),(50,50), fuente, 0.75,(0,255,0),2,cv2.LINE_AA)
                 cv2.drawContours(cv_image, [c],0,(255,0,0),3)
+                self.puntos.x = x
+                self.puntos.y = y
+                self.puntos.z = 0
+                self.esfera_publicador_posicion.publish(self.puntos)
                 #print("El contorno {} tiene un area de {}".format(c,area))
 
-        
-
-
-
+        cv2.line(cv_image, (639,342), (739,342), (0,0,255), 2)
+        cv2.line(cv_image, (639,342), (639,442), (0,255,0), 2)
         cv2.imshow('camara',cv_image)
         #cv2.imshow('En HSV',img_hsv)
         #cv2.imshow('Filtrado HSV',mascara_1)
