@@ -107,20 +107,23 @@
 			  -model esfera -x $(arg xsphe) -y $(arg ysphe) -z $(arg zsphe)"/> 
     
 
-    <!-- State Publisher -->
+    <!-- State Publisher
     <node 
         pkg="robot_state_publisher" 
         type="robot_state_publisher" 
         name="robot_state_publisher" 
         output="screen"
     />
+     -->
 
-    <!-- Broadcaster  -->
+    <!-- Broadcaster 
     <node 
         pkg="proyecto_final_rcsv" 
         type="trayectory_publisher.py" 
         name="trayectory_publisher" 
         output="screen" />
+
+     -->
         
 
 </launch>
