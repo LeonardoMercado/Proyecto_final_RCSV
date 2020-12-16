@@ -53,7 +53,7 @@ class image_receive:
 
         cv2.line(cv_image, (639,342), (739,342), (0,0,255), 2)
         cv2.line(cv_image, (639,342), (639,442), (0,255,0), 2)
-        cv2.imshow('camara',cv_image)
+        cv2.imshow('deteccion',cv_image)
         #cv2.imshow('En HSV',img_hsv)
         #cv2.imshow('Filtrado HSV',mascara_1)
         #cv2.imshow('Filtrado',mascara_color)
