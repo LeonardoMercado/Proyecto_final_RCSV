@@ -9,8 +9,8 @@ import imutils
 import os
 
 
-Datos = "/home/leonardo/Documentos/01_RCSV/05_Proyecto_Final/Proyecto_final_RCSV/proyecto_final_rcsv/caja_1/p"
-#os.chdir('/Documentos/01_RCSV/05_Proyecto_Final/Proyecto_final_RCSV/proyecto_final_rcsv/caja_1/p')
+Datos = "/home/leonardo/Documentos/01_RCSV/05_Proyecto_Final/Proyecto_final_RCSV/proyecto_final_rcsv/cono/n"
+
 """
 if not os.path.exists(Datos):
     print('Carpeta creada: ',Datos)
@@ -28,7 +28,7 @@ class image_receive:
 
     def __init__(self):
         #--- Suscriptor del topico de la camara
-        self.count = 205
+        self.count = 172
         self.bridge = CvBridge()
         self.image_sub = rospy.Subscriber("/kobuki/camara_principal/image_raw",Image,self.callback)
 
