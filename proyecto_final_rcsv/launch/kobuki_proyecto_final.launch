@@ -3,7 +3,7 @@
 
     <!-- start Gazebo with taller empty world -->
     <!-- Define world -->
-    <arg name="proyecto_final_world" default="$(find gazebo_ros)/launch/empty_world.launch"/>
+    <arg name="proyecto_final_world" default="$(find proyecto_final_rcsv)/worlds/obstaculos.world"/>
     
     <arg name="trayec" default="1"/>
     <param name="trayec_py" value="$(arg trayec)"/>
@@ -84,10 +84,6 @@
                 respawn="false">
         </node>    
     </group>
-
-
-
-
 
     <!-- Launch Gazebo-->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
